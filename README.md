@@ -1,4 +1,4 @@
-# Ohjelmistotekniikka, harjoitustyö
+# Magic Archive
 
 [![CI](https://github.com/jtpcode/ot-harjoitustyo/actions/workflows/main.yml/badge.svg)](https://github.com/jtpcode/ot-harjoitustyo/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/jtpcode/ot-harjoitustyo/graph/badge.svg?token=YRY6AKKYRG)](https://codecov.io/gh/jtpcode/ot-harjoitustyo)
