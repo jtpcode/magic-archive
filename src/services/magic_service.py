@@ -128,7 +128,8 @@ class MagicService:
 
         if not user:
             raise InvalidUsernameError("Invalid username")
-        if user.password != password:
+
+        if not self._user_repository.verify_password(password, user.password):
             raise InvalidPasswordError("Invalid password")
 
         self._user = user

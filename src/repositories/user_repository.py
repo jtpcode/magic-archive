@@ -1,4 +1,5 @@
 from sqlite3 import DatabaseError
+import bcrypt
 from utils.database.database_connection import get_database_connection
 from entities.user import User
 
@@ -32,6 +33,33 @@ class UserRepository:
         """
 
         self._connection = connection
+
+    def _hash_password(self, password):
+        """Hash password using bcrypt.
+
+        Args:
+            password (str): Plain text password
+
+        Returns:
+            str: Hashed password
+        """
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
+        return hashed.decode("utf-8")
+
+    def verify_password(self, password, hashed_password):
+        """Verify password against hash.
+
+        Args:
+            password (str): Plain text password
+            hashed_password (str): Hashed password from database
+
+        Returns:
+            bool: True if password matches
+        """
+        return bcrypt.checkpw(
+            password.encode("utf-8"), hashed_password.encode("utf-8")
+        )
 
     def find_all(self):
         """Returns all users.
@@ -102,10 +130,12 @@ class UserRepository:
 
         cursor = self._connection.cursor()
 
+        hashed_password = self._hash_password(user.password)
+
         try:
             cursor.execute(
                 "INSERT INTO Users (username, password) VALUES (?, ?)",
-                (user.username, user.password)
+                (user.username, hashed_password)
             )
         except DatabaseError as e:
             raise DatabaseCreateError(
