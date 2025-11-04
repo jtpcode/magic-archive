@@ -37,6 +37,7 @@ class TestMagicService(unittest.TestCase):
 
     def login_user(self):
         self.user_repository_mock.find_by_username.return_value = self.user_alfa
+        self.user_repository_mock.verify_password.return_value = True
 
         user = self.magic_service.login(
             self.user_alfa.username,
@@ -98,6 +99,7 @@ class TestMagicService(unittest.TestCase):
 
     def test_login_with_invalid_password(self):
         self.user_repository_mock.find_by_username.return_value = self.user_alfa
+        self.user_repository_mock.verify_password.return_value = False
 
         self.assertRaises(
             InvalidPasswordError,
