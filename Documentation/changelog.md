@@ -50,3 +50,8 @@
 - Special cards (ie. double sided and flip cards) handled
 - Added "delete card from user" and error handling.
 - Change button: Submit -> Add
+
+  ## 4.11.2025
+  - Add hashing of user passwords when saving into database
+  - Alter login accordingly
+  - Alter tests accordingly
