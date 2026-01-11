@@ -79,3 +79,5 @@ Linting can be done with:
 poetry run invoke lint
 ```
 
+## License
+MIT License. See [LICENSE](LICENSE) for details.
